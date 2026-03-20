@@ -2,10 +2,10 @@ plugins {
     `java`
 }
 
-// Target Java 17 — compatible with Trino 479's Java 23 runtime
+// Trino 479 SPI is compiled with Java 25
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 // Must match the Trino server version (trinodb/trino:<version> in docker-compose)

@@ -3,3 +3,4 @@ build/
 libs/
 *.class
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
