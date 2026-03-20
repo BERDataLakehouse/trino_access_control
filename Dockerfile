@@ -4,7 +4,7 @@
 # ARG before any FROM so it's available in FROM instructions
 ARG TRINO_VERSION=479
 
-FROM gradle:9.4.1-jdk25-ubi-minimal AS builder
+FROM gradle:9.4.0-jdk25-ubi AS builder
 WORKDIR /build
 COPY build.gradle.kts settings.gradle.kts ./
 COPY src/ src/
