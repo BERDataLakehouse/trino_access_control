@@ -205,6 +205,32 @@ public class BerdlSystemAccessControl implements SystemAccessControl {
     }
 
     // -----------------------------------------------------------------------
+    // Catalog DDL checks — restricts CREATE/DROP CATALOG
+    // -----------------------------------------------------------------------
+
+    @Override
+    public void checkCanCreateCatalog(SystemSecurityContext context, String catalog) {
+        String user = getUser(context);
+        String userCatalogPrefix = USER_PREFIX + user.toLowerCase(Locale.ROOT) + CATALOG_SEPARATOR;
+        if (!catalog.toLowerCase(Locale.ROOT).startsWith(userCatalogPrefix)) {
+            throw new AccessDeniedException(
+                    "Cannot create catalog '" + catalog + "'. " +
+                    "Catalog names must start with '" + userCatalogPrefix + "'.");
+        }
+    }
+
+    @Override
+    public void checkCanDropCatalog(SystemSecurityContext context, String catalog) {
+        String user = getUser(context);
+        String userCatalogPrefix = USER_PREFIX + user.toLowerCase(Locale.ROOT) + CATALOG_SEPARATOR;
+        if (!catalog.toLowerCase(Locale.ROOT).startsWith(userCatalogPrefix)) {
+            throw new AccessDeniedException(
+                    "Cannot drop catalog '" + catalog + "'. " +
+                    "Only catalogs starting with '" + userCatalogPrefix + "' can be dropped.");
+        }
+    }
+
+    // -----------------------------------------------------------------------
     // DDL checks — restricts CREATE/DROP SCHEMA and CREATE/DROP/RENAME TABLE
     // -----------------------------------------------------------------------
 
