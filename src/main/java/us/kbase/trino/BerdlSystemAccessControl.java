@@ -6,9 +6,9 @@
  *
  * Configuration (in access-control.properties):
  *   access-control.name=berdl-namespace-isolation
- *   shared.catalogs=delta,hive,system
+ *   shared.catalogs=              # empty — users only see u_{username}_* dynamic catalogs
  *   shared.schemas=information_schema,default
- *   unfiltered.catalogs=system
+ *   unfiltered.catalogs=          # empty — all catalogs enforce namespace filtering
  */
 package us.kbase.trino;
 
